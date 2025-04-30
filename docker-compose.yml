@@ -1,0 +1,17 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    environment:
+      - RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
+      # Fix the database path to be relative to the /rails directory
+      - DATABASE_URL=sqlite3:/rails/db/production.sqlite3
+    volumes:
+      - rails_storage:/rails/storage
+    restart: unless-stopped
+    
+volumes:
+  rails_storage:
