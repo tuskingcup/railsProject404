@@ -5,12 +5,17 @@ pipeline {
     MY_VARIABLE = "Hello, World!"
   }
 
-  stages {
-    stage('Build') {
-      steps {
-        echo 'Building...'
-      }
+  stage('Build Docker Image') {
+    steps {
+      sh """
+        docker build --rm \
+        -f Dockerfile \
+        -t tuskungg/tuskungg404-service \
+        -t tuskungg/tuskungg404-service:${env.BUILD_NUMBER} \
+        .
+      """
     }
+  }
 
     stage('Test') {
       steps {
