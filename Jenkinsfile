@@ -25,6 +25,8 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'DOCKER_CREDENTIALS', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                 sh """
+			echo $DOCKER_USERNAME
+   			echo $DOCKER_PASSWORD
 			docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD registry.hub.docker.com
    			docker push registry-1.docker.io/tuskungg/tuskungg404-service:${env.BUILD_NUMBER}
 		"""
