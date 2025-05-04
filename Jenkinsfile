@@ -15,8 +15,8 @@ pipeline {
                 sh """
                     docker build --rm \
                     -f Dockerfile \
-                    -t docker.io/tuskungg/static-web-example \
-                    -t docker.io/tuskungg/static-web-example:${env.BUILD_NUMBER} \
+                    -t registry-1.docker.io/docker.io/tuskungg/static-web-example \
+                    -t registry-1.docker.io/tuskungg/static-web-example:${env.BUILD_NUMBER} \
                     .
                 """
             }
@@ -27,8 +27,8 @@ pipeline {
                 sh """
 			echo $DOCKER_USERNAME
    			echo $DOCKER_PASSWORD
-			docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-   			docker push docker.io/tuskungg/static-web-example:${env.BUILD_NUMBER}
+			docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD registry-1.docker.io
+   			docker push registry-1.docker.io/tuskungg/static-web-example:${env.BUILD_NUMBER}
 		"""
                 }
             }
