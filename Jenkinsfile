@@ -27,7 +27,7 @@ pipeline {
                 sh """
 			echo $DOCKER_USERNAME
    			echo $DOCKER_PASSWORD
-			docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD registry.hub.docker.com
+			docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
    			docker push docker.io/tuskungg/static-web-example:${env.BUILD_NUMBER}
 		"""
                 }
