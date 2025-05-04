@@ -15,7 +15,7 @@ pipeline {
                 sh """
                     docker build --rm \
                     -f Dockerfile \
-                    -t registry-1.docker.io/docker.io/tuskungg/static-web-example \
+                    -t registry-1.docker.io/tuskungg/static-web-example \
                     -t registry-1.docker.io/tuskungg/static-web-example:${env.BUILD_NUMBER} \
                     .
                 """
