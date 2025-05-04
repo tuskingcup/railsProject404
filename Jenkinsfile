@@ -15,8 +15,8 @@ pipeline {
                 sh """
                     docker build --rm \
                     -f Dockerfile \
-                    -t tuskungg/tuskungg404-service \
-                    -t tuskungg/tuskungg404-service:${env.BUILD_NUMBER} \
+                    -t registry-1.docker.io/tuskungg/tuskungg404-service \
+                    -t registry-1.docker.io/tuskungg/tuskungg404-service:${env.BUILD_NUMBER} \
                     .
                 """
             }
@@ -26,7 +26,7 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'DOCKER_CREDENTIALS', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                 sh """
 			docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD registry.hub.docker.com
-   			docker push tuskungg/tuskungg404-service:${env.BUILD_NUMBER}
+   			docker push registry-1.docker.io/tuskungg/tuskungg404-service:${env.BUILD_NUMBER}
 		"""
                 }
             }
