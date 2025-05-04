@@ -1,42 +1,25 @@
+// Jenkinsfile-Integration
 pipeline {
-  agent any
+    agent any
+    stages {
+        stage('list file') {
+            steps { 
+                sh 'ls -l'
+                sh 'ls -l'
 
-  environment {
-    MY_VARIABLE = "Hello, World!"
-  }
-
-    stage('Build Docker Image') {
-      steps {
-        sh """
-          docker build --rm \
-          -f Dockerfile \
-          -t tuskungg/tuskungg404-service \
-          -t tuskungg/tuskungg404-service:${env.BUILD_NUMBER} \
-          .
-        """
-      }
+            }
+        }
+        stage('Build Docker Image') {
+            steps {
+                // สร้าง Docker image
+                sh """
+                    docker build --rm \
+                    -f Dockerfile \
+                    -t static-web \
+                    -t static-web:v1 \
+                    .
+                """
+            }
+        }
     }
-
-    stage('Test') {
-      steps {
-        echo 'Running tests...'
-      }
-    }
-
-    stage('Deploy') {
-      steps {
-        echo 'Deploying...'
-      }
-    }
-  
-
-  post {
-    success {
-      echo 'Pipeline executed successfully!'
-    }
-
-    failure {
-      echo 'Pipeline execution failed!'
-    }
-  }
 }
