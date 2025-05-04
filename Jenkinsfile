@@ -40,11 +40,11 @@ pipeline {
                     sshagent (credentials: ["SSH_KEY_DEV_SERVER"]){
                         withCredentials([usernamePassword(credentialsId: 'DOCKER_CREDENTIALS', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                             sh """
-                                ssh -o StrictHostKeyChecking=no -l ubuntu 10.11.0.210 \"
+                                ssh -o StrictHostKeyChecking=no -l ubuntu 10.11.0.211 \"
                                     ls -l
                                     docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD registry-1.docker.io
                                     docker pull registry-1.docker.io/tuskungg/static-web-example:${env.BUILD_NUMBER}
-                                    docker run -dp 7002:80 registry-1.docker.io/tuskungg/static-web-example:${env.BUILD_NUMBER}
+                                    docker run -dp 7002:80 --name tuskungg registry-1.docker.io/tuskungg/static-web-example:${env.BUILD_NUMBER}
                                 \"
                             """
                         }
