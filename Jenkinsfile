@@ -15,8 +15,8 @@ pipeline {
                 sh """
                     docker build --rm \
                     -f Dockerfile \
-                    -t static-web \
-                    -t static-web:v1 \
+                    -t tuskungg/tuskungg404-service \
+                    -t tuskungg/tuskungg404-service:${env.BUILD_NUMBER} \
                     .
                 """
             }
